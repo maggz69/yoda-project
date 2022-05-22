@@ -13,13 +13,23 @@ using namespace std;
 
 int main(){
 
-    const int height = 565;
-    const int width = 848;
+	int shape[2];
+    ifstream shapefile("shape_data.txt");
+
+    if(!shapefile.is_open()){
+        cout<<"Error opening file";
+    }
+
+    for(int i=0; i<2; i++){
+        shapefile >> shape[i];
+    }
+    
+	const int height = shape[0];
+    const int width = shape[1];
 	const int window_size = 3;
 
 	
-    array<array<int, width>, height> img; //= {{{4,5,6,7},{0,1,2,3},{12,13,14,15},{8,9,10,11}}};
-	
+	int img[height][width];
 	
     ifstream inputfile("image1_data.txt");
 
@@ -101,7 +111,7 @@ int main(){
 	size_t local_size = width; //Size of each work group
 	cl_int num_groups = global_size/local_size; //number of work groups needed
 	
-	image_data_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, height*width*sizeof(int), img.data(), &err);
+	image_data_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, height*width*sizeof(int), img, &err);
 
 	clSetKernelArg(kernel, 0, sizeof(cl_mem), &image_data_buffer);
 
@@ -112,7 +122,7 @@ int main(){
 
 	printf("\nKernel check: %i \n",err4);
 	
-	err = clEnqueueReadBuffer(queue, image_data_buffer, CL_TRUE, 0, sizeof(img), img.data(), 0, NULL, NULL);
+	err = clEnqueueReadBuffer(queue, image_data_buffer, CL_TRUE, 0, sizeof(img), img, 0, NULL, NULL);
 	
 	clFinish(queue);
 
