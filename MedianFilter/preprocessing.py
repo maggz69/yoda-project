@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-img = cv2.imread('salt-and-pepper-strangle_1.jpg', cv2.IMREAD_GRAYSCALE)
+img = cv2.imread('1.png', cv2.IMREAD_GRAYSCALE)
 #img = cv2.resize(img, (1200,1200))
 height = np.shape(img)[0]
 width = np.shape(img)[1]

@@ -1,12 +1,13 @@
 __kernel void medianFilter(
-	__global int* img
+	__global int* img,
+	__global int* w
 	)
 
 {	
 
 	int i = get_global_id(0);
 	int grp_id = get_group_id(0);
-	int width = 848;
+	int width = *w;
 	int limit1 = (grp_id+1)*width-3;
 	int limit2 = width*width - 2*width;
 	int window_size = 3;

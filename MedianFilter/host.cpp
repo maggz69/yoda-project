@@ -24,9 +24,9 @@ int main(){
         shapefile >> shape[i];
     }
     
-	const int height = shape[0];
-    const int width = shape[1];
-	const int window_size = 3;
+	int height = shape[0];
+    int width = shape[1];
+	int window_size = 3;
 
 	
 	int img[height][width];
@@ -45,7 +45,7 @@ int main(){
     
 	
 
-    cl_mem image_data_buffer;
+    cl_mem image_data_buffer, width_buffer;
 	cl_uint platformCount; 
 	cl_platform_id *platforms;
 	clGetPlatformIDs(5, NULL, &platformCount); 
@@ -112,8 +112,10 @@ int main(){
 	cl_int num_groups = global_size/local_size; //number of work groups needed
 	
 	image_data_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, height*width*sizeof(int), img, &err);
+	width_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR, sizeof(int), &width, &err);
 
 	clSetKernelArg(kernel, 0, sizeof(cl_mem), &image_data_buffer);
+	clSetKernelArg(kernel, 1, sizeof(cl_mem), &width_buffer);
 
 	
 	
