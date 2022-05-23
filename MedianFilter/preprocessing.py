@@ -7,6 +7,9 @@ import random
 
 def readImageAsArray(imageName):
     img = cv2.imread(imageName, cv2.IMREAD_GRAYSCALE)
+    if(img.shape[0]>1000):
+        img = cv2.resize(img, (1000, 1000))
+    print(img.shape)
     return img
 
 

@@ -6,20 +6,21 @@
 
 using namespace std;
 
-
-int main(int argc, char *argv[]){
-    int shape[2];
-
-    string inputShapeName = "data/shapeData/2_Noisy.txt";
-    string inputFileName = "data/imageData/2_Noisy.txt";
-    string outputFileName = "data/imageData/2_MedianFiltered.txt";
+void medianFilter(string indx){
+    string inputShapeName = "data/shapeData/"+indx;
+    inputShapeName = inputShapeName + "_Noisy.txt"; 
+    cout<<inputShapeName<<"\n";
+    string inputFileName = "data/imageData/"+indx;
+    inputFileName = inputFileName + "_Noisy.txt"; 
+    string outputFileName = "data/imageData/"+indx;
+    outputFileName = outputFileName + "_MedianFiltered.txt";
 
     ifstream shapefile(inputShapeName);
 
     if(!shapefile.is_open()){
         cout<<"Error opening file";
     }
-
+    int shape[2];
     for(int i=0; i<2; i++){
         shapefile >> shape[i];
     }
@@ -83,6 +84,16 @@ int main(int argc, char *argv[]){
         }
         out<<endl;
     }
+}
 
+int main(int argc, char *argv[]){
+    
+    printf("Enter the number of images:\n");
+    int x;
+    scanf("%d", &x);
+
+    for(int i=0; i<x; i++){
+        medianFilter(to_string(i));
+    }
     return 0;
 }
