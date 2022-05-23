@@ -7,9 +7,14 @@
 using namespace std;
 
 
-int main(){
+int main(int argc, char *argv[]){
     int shape[2];
-    ifstream shapefile("shape_data.txt");
+
+    string inputShapeName = "data/shapeData/2_Noisy.txt";
+    string inputFileName = "data/shapeData/2_Noisy.txt";
+    string outputFileName = "data/imageData/2_MedianFiltered.txt";
+
+    ifstream shapefile(inputShapeName);
 
     if(!shapefile.is_open()){
         cout<<"Error opening file";
@@ -26,7 +31,7 @@ int main(){
     //array<array<int, width>, height> img;
     int img[height][width];
     
-    ifstream inputfile("image1_data.txt");
+    ifstream inputfile(inputFileName);
 
     if(!inputfile.is_open()){
         cout<<"Error opening file";
@@ -70,7 +75,7 @@ int main(){
     float time = ((float) end-start)/CLOCKS_PER_SEC;
     printf("Sequential MedianFilter Execuition time: %0.8f milliseconds \n", time*1000.0);
 
-    ofstream out("filtered_data.txt");
+    ofstream out(outputFileName);
     
     for(int i=0; i<height;i++){
         for(int j=0; j<width;j++){

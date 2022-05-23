@@ -3,3 +3,6 @@
 .vscode/targets.log
 
 MedianFilter/data/*/**
+.vscode/dryrun.log
+MedianFilter/bin/medianFilter.out
+MedianFilter/bin/host.out

@@ -21,3 +21,6 @@ speedup:
 
 clean:
 	 rm -rf bin/*
+	 rm -rf data/image/*
+	 rm -rf data/imageData/*
+	 rm -rf data/shapeData/*

@@ -11,10 +11,11 @@ def readImageAsArray(imageName):
 
 
 def getAllFilesInDirectory(path):
-    # get all absolute paths of files in directory
+    # covert path to absolute path
+    path = os.path.abspath(path)
     files = []
     for file in os.listdir(path):
-        files.append(normpath(os.getcwd() + "/" + path+"/"+file))
+        files.append(normpath(path+"/"+file))
     return files
 
 
@@ -22,17 +23,17 @@ def outputImageData(img,prefix,indx):
     imgShape = np.array([np.shape(img)[0], np.shape(img)[1]])
     # write into shape data file
     shapeFileDir = os.path.abspath(os.path.join(
-        os.getcwd(), 'MedianFilter/data/shapeData/'+str(indx)+prefix+'.txt'))
+        os.getcwd(), 'data/shapeData/'+str(indx)+prefix+'.txt'))
     np.savetxt(shapeFileDir, imgShape, fmt='%d')
 
     # write into image data file
     imgFileDir = os.path.abspath(os.path.join(
-        os.getcwd(), 'MedianFilter/data/imageData/'+str(indx)+prefix+'.txt'))
+        os.getcwd(), 'data/imageData/'+str(indx)+prefix+'.txt'))
     np.savetxt(imgFileDir, img, fmt='%d')
 
     # save image into image directory
     cv2.imwrite(os.path.abspath(os.path.join(
-        os.getcwd(), 'MedianFilter/data/image/'+str(indx)+prefix+'.png')), img)
+        os.getcwd(), 'data/image/'+str(indx)+prefix+'.png')), img)
 
 
 def parseShapeData(fileNames):
@@ -84,7 +85,7 @@ def add_noise(img):
 
 
 if __name__ == "__main__":
-    originalImagesPath = "MedianFilter/Images/Original"
+    originalImagesPath = "Images/Original"
 
     # read all files in directory
     files = getAllFilesInDirectory(originalImagesPath)
