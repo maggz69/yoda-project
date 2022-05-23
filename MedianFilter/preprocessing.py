@@ -39,9 +39,9 @@ def parseShapeData(fileNames):
 
     for indx, file in enumerate(fileNames):
         origImage = readImageAsArray(file)
-        noisyImage = add_noise(origImage)
-
         outputImageData(origImage, "_Original", indx)
+        
+        noisyImage = add_noise(origImage)
         outputImageData(noisyImage, "_Noisy", indx)
 
 
