@@ -13,8 +13,12 @@ using namespace std;
 
 int main(){
 
+	string inputShapeName = "data/shapeData/2_Noisy.txt";
+    string inputFileName = "data/imageData/2_Noisy.txt";
+    string outputFileName = "data/imageData/2_CL_Filtered.txt";
+
 	int shape[2];
-    ifstream shapefile("shape_data.txt");
+    ifstream shapefile(inputShapeName);
 
     if(!shapefile.is_open()){
         cout<<"Error opening file";
@@ -31,7 +35,7 @@ int main(){
 	
 	int img[height][width];
 	
-    ifstream inputfile("image1_data.txt");
+    ifstream inputfile(inputFileName);
 
     if(!inputfile.is_open()){
         cout<<"Error opening file";
@@ -132,7 +136,7 @@ int main(){
     float time = ((float) end-start)/CLOCKS_PER_SEC;
     printf("OpenCL MedianFilter Execuition time: %0.8f milliseconds \n", time*1000.0);
 	
-	ofstream out("OpenCL_filtered_data.txt");
+	ofstream out(outputFileName);
     
     for(int i=0; i<height;i++){
         for(int j=0; j<width;j++){

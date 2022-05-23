@@ -11,7 +11,7 @@ int main(int argc, char *argv[]){
     int shape[2];
 
     string inputShapeName = "data/shapeData/2_Noisy.txt";
-    string inputFileName = "data/shapeData/2_Noisy.txt";
+    string inputFileName = "data/imageData/2_Noisy.txt";
     string outputFileName = "data/imageData/2_MedianFiltered.txt";
 
     ifstream shapefile(inputShapeName);

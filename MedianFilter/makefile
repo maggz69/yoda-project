@@ -19,6 +19,14 @@ post:
 speedup:
 	python3 speedup.py
 
+all:
+	python3 preprocessing.py
+	g++ medianFilter.cpp -g -o bin/medianFilter.out
+	bin/medianFilter.out
+	g++ host.cpp -g -o bin/host.out -lOpenCL
+	bin/host.out
+	python3 post_processing.py
+
 clean:
 	 rm -rf bin/*
 	 rm -rf data/image/*
